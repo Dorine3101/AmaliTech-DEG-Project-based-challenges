@@ -1,0 +1,166 @@
+{
+  "nodes": [
+    {
+      "id": "start",
+      "text": "Welcome to SupportFlow! How can I help you today?",
+      "x": 400,
+      "y": 50,
+      "type": "start",
+      "options": ["Billing", "Technical Support", "General Inquiry"]
+    },
+    {
+      "id": "billing",
+      "text": "Is this about a billing inquiry?",
+      "x": 150,
+      "y": 200,
+      "type": "question",
+      "parentId": "start",
+      "options": ["Yes", "No"]
+    },
+    {
+      "id": "billing_yes",
+      "text": "The Finance Department will reach you as soon as possible.",
+      "x": 50,
+      "y": 350,
+      "type": "end",
+      "parentId": "billing"
+    },
+    {
+      "id": "billing_no",
+      "text": "Please type your question below and click Send.",
+      "x": 250,
+      "y": 350,
+      "type": "question",
+      "parentId": "billing",
+      "options": ["Send"],
+      "requiresInput": true
+    },
+    {
+      "id": "billing_no_sent",
+      "text": "The Finance Department will get to you soon.",
+      "x": 250,
+      "y": 500,
+      "type": "end",
+      "parentId": "billing_no"
+    },
+    {
+      "id": "tech_support",
+      "text": "What type of technical issue are you experiencing?",
+      "x": 450,
+      "y": 200,
+      "type": "question",
+      "parentId": "start",
+      "options": ["Login Issues", "Performance", "Feature Request"]
+    },
+    {
+      "id": "login_issue",
+      "text": "Have you tried resetting your password?",
+      "x": 350,
+      "y": 350,
+      "type": "question",
+      "parentId": "tech_support",
+      "options": ["Yes", "No"]
+    },
+    {
+      "id": "login_yes",
+      "text": "Our technical team will contact you shortly to help resolve your login issue.",
+      "x": 280,
+      "y": 500,
+      "type": "end",
+      "parentId": "login_issue"
+    },
+    {
+      "id": "login_no",
+      "text": "Please use the 'Forgot Password' link on the login page to reset your password.",
+      "x": 420,
+      "y": 500,
+      "type": "end",
+      "parentId": "login_issue"
+    },
+    {
+      "id": "performance",
+      "text": "Is the issue occurring on mobile or desktop?",
+      "x": 550,
+      "y": 350,
+      "type": "question",
+      "parentId": "tech_support",
+      "options": ["Mobile", "Desktop"]
+    },
+    {
+      "id": "performance_mobile",
+      "text": "Please try clearing your app cache and restarting the application.",
+      "x": 480,
+      "y": 500,
+      "type": "end",
+      "parentId": "performance"
+    },
+    {
+      "id": "performance_desktop",
+      "text": "Please try clearing your browser cache and disabling browser extensions.",
+      "x": 620,
+      "y": 500,
+      "type": "end",
+      "parentId": "performance"
+    },
+    {
+      "id": "feature_request",
+      "text": "Thank you for your feedback! Our product team will review your feature request.",
+      "x": 750,
+      "y": 350,
+      "type": "end",
+      "parentId": "tech_support"
+    },
+    {
+      "id": "general",
+      "text": "Is your inquiry about hours of operation or contact information?",
+      "x": 750,
+      "y": 200,
+      "type": "question",
+      "parentId": "start",
+      "options": ["Yes", "No"]
+    },
+    {
+      "id": "general_yes",
+      "text": "Would you like to know our hours or contact information?",
+      "x": 650,
+      "y": 350,
+      "type": "question",
+      "parentId": "general",
+      "options": ["Hours", "Contact"]
+    },
+    {
+      "id": "hours",
+      "text": "Our support team is available 24/7 for your convenience.",
+      "x": 580,
+      "y": 500,
+      "type": "end",
+      "parentId": "general_yes"
+    },
+    {
+      "id": "contact",
+      "text": "You can reach us at support@supportflow.ai or call 1-800-SUPPORT.",
+      "x": 720,
+      "y": 500,
+      "type": "end",
+      "parentId": "general_yes"
+    },
+    {
+      "id": "general_no",
+      "text": "Please type your question below and click Send.",
+      "x": 850,
+      "y": 350,
+      "type": "question",
+      "parentId": "general",
+      "options": ["Send"],
+      "requiresInput": true
+    },
+    {
+      "id": "general_no_sent",
+      "text": "The Finance Department will get to you soon.",
+      "x": 850,
+      "y": 500,
+      "type": "end",
+      "parentId": "general_no"
+    }
+  ]
+}
