@@ -2,6 +2,10 @@
 🔗 [View Live](https://amali-tech-deg-project-based-challe-beta.vercel.app/)
 
 
+## Design Documentation
+[View Design System PDF](./SupportFlow%20Visual%20Builder%20-%20Design%20System.pdf)
+
+
 # SupportFlow Visual Builder
 
 A modern visual decision tree editor for building and testing automated customer support conversation flows.
