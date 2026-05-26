@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupportFlow Visual Builder - Design System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #1e293b;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #64748b;
+        }
+
+        /* Color Palette Section */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .color-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .color-swatch {
+            width: 100%;
+            height: 80px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .color-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .color-hex {
+            font-family: monospace;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* Canvas Section */
+        .canvas-demo {
+            background: #f8f9fa;
+            background-image: 
+                linear-gradient(#e9ecef 1px, transparent 1px),
+                linear-gradient(90deg, #e9ecef 1px, transparent 1px);
+            background-size: 20px 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            height: 300px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        /* Node Cards */
+        .node {
+            position: absolute;
+            width: 300px;
+            background: #ffffff;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .node[data-type="start"] {
+            border-left: 4px solid #10b981;
+        }
+
+        .node[data-type="question"] {
+            border-left: 4px solid #3b82f6;
+        }
+
+        .node[data-type="end"] {
+            border-left: 4px solid #ef4444;
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .node-type-badge {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .node[data-type="start"] .node-type-badge {
+            background: #ecfdf5;
+            color: #10b981;
+        }
+
+        .node[data-type="question"] .node-type-badge {
+            background: #eff6ff;
+            color: #3b82f6;
+        }
+
+        .node[data-type="end"] .node-type-badge {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .node-id {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .node-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .node-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .node-option {
+            font-size: 12px;
+            background: #f8f9fa;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #64748b;
+        }
+
+        /* Connector Demo */
+        .connector-demo {
+            height: 200px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .connector-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .connector-path {
+            fill: none;
+            stroke: #94a3b8;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        /* Typography Section */
+        .typography-demo {
+            margin: 20px 0;
+        }
+
+        .typography-item {
+            margin-bottom: 20px;
+        }
+
+        .typography-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .typography-sample {
+            margin-bottom: 5px;
+        }
+
+        /* Buttons Section */
+        .button-demo {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .button-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .button-secondary {
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #dee2e6;
+        }
+
+        .button-success {
+            background: #10b981;
+            color: white;
+        }
+
+        /* Spacing Section */
+        .spacing-demo {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .spacing-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .spacing-label {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                padding: 20px;
+            }
+            h2 {
+                page-break-before: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SupportFlow Visual Builder</h1>
+        <p>Design System Documentation</p>
+
+        <h2>1. Canvas</h2>
+        <p>The canvas provides a grid-based workspace for building conversation flows.</p>
+        <div class="canvas-demo">
+            <div class="node" data-type="start" style="left: 50px; top: 50px;">
+                <div class="node-header">
+                    <span class="node-type-badge">START</span>
+                    <span class="node-id">start</span>
+                </div>
+                <div class="node-text">Welcome to SupportFlow!</div>
+                <div class="node-options">
+                    <span class="node-option">Option 1</span>
+                    <span class="node-option">Option 2</span>
+                </div>
+            </div>
+            <div class="node" data-type="question" style="left: 400px; top: 50px;">
+                <div class="node-header">
+                    <span class="node-type-badge">QUESTION</span>
+                    <span class="node-id">question_1</span>
+                </div>
+                <div class="node-text">What would you like to do?</div>
+                <div class="node-options">
+                    <span class="node-option">Yes</span>
+                    <span class="node-option">No</span>
+                </div>
+            </div>
+        </div>
+
+        <h2>2. Node Cards</h2>
+        <p>Node cards represent conversation steps with type-specific styling.</p>
+        
+        <h3>Start Node</h3>
+        <div class="node" data-type="start" style="position: relative; margin-bottom: 20px;">
+            <div class="node-header">
+                <span class="node-type-badge">START</span>
+                <span class="node-id">start</span>
+            </div>
+            <div class="node-text">Welcome to SupportFlow! How can I help you today?</div>
+            <div class="node-options">
+                <span class="node-option">Billing</span>
+                <span class="node-option">Technical Support</span>
+                <span class="node-option">General Inquiry</span>
+            </div>
+        </div>
+
+        <h3>Question Node</h3>
+        <div class="node" data-type="question" style="position: relative; margin-bottom: 20px;">
+            <div class="node-header">
+                <span class="node-type-badge">QUESTION</span>
+                <span class="node-id">billing</span>
+            </div>
+            <div class="node-text">Is this about a billing inquiry?</div>
+            <div class="node-options">
+                <span class="node-option">Yes</span>
+                <span class="node-option">No</span>
+            </div>
+        </div>
+
+        <h3>End Node</h3>
+        <div class="node" data-type="end" style="position: relative; margin-bottom: 20px;">
+            <div class="node-header">
+                <span class="node-type-badge">END</span>
+                <span class="node-id">billing_yes</span>
+            </div>
+            <div class="node-text">The Finance Department will reach you as soon as possible.</div>
+        </div>
+
+        <h2>3. Connectors</h2>
+        <p>Smooth bezier curves connect parent nodes to child nodes.</p>
+        <div class="connector-demo">
+            <svg class="connector-svg">
+                <path class="connector-path" d="M 50 100 C 50 150, 250 150, 250 200" />
+                <path class="connector-path" d="M 250 100 C 250 150, 450 150, 450 200" />
+                <path class="connector-path" d="M 450 100 C 450 150, 650 150, 650 200" />
+            </svg>
+        </div>
+
+        <h2>4. Color Semantics</h2>
+        <p>Type-specific colors provide visual hierarchy and meaning.</p>
+        <div class="color-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background: #10b981;"></div>
+                <div class="color-name">Start Accent</div>
+                <div class="color-hex">#10b981</div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #3b82f6;"></div>
+                <div class="color-name">Question Accent</div>
+                <div class="color-hex">#3b82f6</div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #ef4444;"></div>
+                <div class="color-name">End Accent</div>
+                <div class="color-hex">#ef4444</div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #f8f9fa;"></div>
+                <div class="color-name">Canvas Background</div>
+                <div class="color-hex">#f8f9fa</div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #94a3b8;"></div>
+                <div class="color-name">Connector Color</div>
+                <div class="color-hex">#94a3b8</div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #1e293b;"></div>
+                <div class="color-name">Primary Text</div>
+                <div class="color-hex">#1e293b</div>
+            </div>
+        </div>
+
+        <h2>5. Typography</h2>
+        <div class="typography-demo">
+            <div class="typography-item">
+                <div class="typography-label">Header - 20px, Weight 600</div>
+                <div class="typography-sample" style="font-size: 20px; font-weight: 600;">SupportFlow Visual Builder</div>
+            </div>
+            <div class="typography-item">
+                <div class="typography-label">Panel Title - 18px, Weight 600</div>
+                <div class="typography-sample" style="font-size: 18px; font-weight: 600;">Edit Node</div>
+            </div>
+            <div class="typography-item">
+                <div class="typography-label">Section Label - 14px, Weight 600, Uppercase</div>
+                <div class="typography-sample" style="font-size: 14px; font-weight: 600; text-transform: uppercase;">QUESTION TEXT</div>
+            </div>
+            <div class="typography-item">
+                <div class="typography-label">Body Text - 14px, Regular</div>
+                <div class="typography-sample" style="font-size: 14px;">Welcome to SupportFlow! How can I help you today?</div>
+            </div>
+            <div class="typography-item">
+                <div class="typography-label">Small Text - 12px, Regular</div>
+                <div class="typography-sample" style="font-size: 12px;">Node ID: billing</div>
+            </div>
+            <div class="typography-item">
+                <div class="typography-label">Badge - 11px, Weight 600, Uppercase</div>
+                <div class="typography-sample" style="font-size: 11px; font-weight: 600; text-transform: uppercase;">START</div>
+            </div>
+        </div>
+
+        <h2>6. Buttons</h2>
+        <div class="button-demo">
+            <button class="button button-primary">Primary Button</button>
+            <button class="button button-secondary">Secondary Button</button>
+            <button class="button button-success">Success Button</button>
+        </div>
+
+        <h2>7. Spacing System</h2>
+        <div class="spacing-demo">
+            <div class="spacing-box">
+                <div class="spacing-label">Node Width: 300px</div>
+            </div>
+            <div class="spacing-box">
+                <div class="spacing-label">Node Padding: 16px</div>
+            </div>
+            <div class="spacing-box">
+                <div class="spacing-label">Border Radius: 8px</div>
+            </div>
+            <div class="spacing-box">
+                <div class="spacing-label">Grid Size: 20px</div>
+            </div>
+        </div>
+
+        <h2>8. Component Specifications</h2>
+        <h3>Node Card Dimensions</h3>
+        <ul>
+            <li>Width: 300px</li>
+            <li>Height: Auto (based on content)</li>
+            <li>Border: 2px solid #dee2e6</li>
+            <li>Left Border: 4px colored accent based on type</li>
+            <li>Shadow: 0 2px 8px rgba(0, 0, 0, 0.1)</li>
+        </ul>
+
+        <h3>Connector Specifications</h3>
+        <ul>
+            <li>Type: Cubic Bezier curves</li>
+            <li>Stroke: 2px width</li>
+            <li>Color: #94a3b8</li>
+            <li>Line Cap: Round</li>
+        </ul>
+
+        <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #e9ecef; color: #64748b; font-size: 12px;">
+            SupportFlow Visual Builder - Design System v1.0
+        </div>
+    </div>
+</body>
+</html>
